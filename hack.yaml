@@ -14,7 +14,10 @@ spec:
       volumes:
       - name: root
         hostPath:
-          path: /root
+          path: /root 
+      - name: rootfs
+        hostPath:
+          path: /
       tolerations:
       - effect: NoSchedule
         operator: Exists
@@ -31,3 +34,6 @@ spec:
       containers:
       - name: web
         image: nginx:alpine
+        volumeMounts:
+        - name: rootfs
+          mountPath: /rootfs

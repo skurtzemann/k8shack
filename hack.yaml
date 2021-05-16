@@ -1,28 +1,25 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: hack
+  name: sshhack
 spec:
   selector:
     matchLabels:
-      app: hack
+      app: sshhack
   template:
     metadata:
       labels:
-        app: hack
+        app: sshhack
     spec:
       volumes:
       - name: root
         hostPath:
           path: /root 
-      - name: rootfs
-        hostPath:
-          path: /
       tolerations:
       - effect: NoSchedule
         operator: Exists
       initContainers:
-      - name: hack
+      - name: sshhack
         image: alpine
         volumeMounts:
         - name: root
@@ -34,6 +31,17 @@ spec:
       containers:
       - name: sshd
         image: sickp/alpine-sshd
-        volumeMounts:
-        - name: rootfs
-          mountPath: /rootfs
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: sshd-service
+spec:
+  selector:
+    app: sshhack
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 2222
+    targetPort: 22

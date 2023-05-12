@@ -3,4 +3,5 @@ kind: Kustomization
 
 resources:
   - github.com/stefanprodan/podinfo/kustomize?ref=master
+  - nginx.yaml
   - httpproxy.yaml

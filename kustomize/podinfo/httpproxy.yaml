@@ -11,3 +11,6 @@ spec:
       services:
         - name: podinfo
           port: 9898
+        - name: nginx
+          port: 8080
+          mirror: true

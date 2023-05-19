@@ -1,0 +1,11 @@
+groups:
+    - name: skurtzemann
+      rules:
+      - alert: SkurtzemannTest
+        expr: count(agent_build_info) > 0
+        for: 15s
+        debug: true
+        labels:
+          severity: page
+        annotations:
+          summary: more than 1 agent are running

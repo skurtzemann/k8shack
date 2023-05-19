@@ -1,0 +1,10 @@
+groups:
+    - name: dummy
+      rules:
+      - alert: AlwaysTrigger
+        expr: vector(1)
+        for: 30s
+        labels:
+          severity: page
+        annotations:
+          summary: Test an active alert

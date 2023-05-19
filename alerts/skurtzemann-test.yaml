@@ -1,7 +1,7 @@
 groups:
     - name: skurtzemann
       rules:
-      - alert: SkurtzemannTest
+      - alert: Test
         expr: count(agent_build_info) > 0
         for: 15s
         debug: true
